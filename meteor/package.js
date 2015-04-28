@@ -20,5 +20,7 @@ Package.onUse(function(api) {
 Package.onTest(function(api) {
   api.use('tinytest');
   api.use('mantarayar:difficulty-algorithms');
+  api.addFiles('../tests/difficulty-algorithm-test.js');
   api.addFiles('../tests/reno-test.js');
+  api.addFiles('../tests/tahoe-test.js');
 });

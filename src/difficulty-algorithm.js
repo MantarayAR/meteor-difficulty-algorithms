@@ -67,4 +67,6 @@ this.DifficultyAlgorithm = function () {
 
     return this._x;
   }
+
+  this.options( arguments[0] || {} );
 }

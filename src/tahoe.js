@@ -16,7 +16,9 @@
  * reset when the player loses, like Flappy Bird or
  * Robot Unicorn Attack.
  */
-var Tahoe = function() {};
+var Tahoe = function() {
+  this.options( ( arguments[0] || {} ) );
+};
 
 Tahoe.prototype = new this.DifficultyAlgorithm;
 Tahoe.prototype.wrong = function () {

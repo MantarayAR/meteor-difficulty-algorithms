@@ -16,11 +16,18 @@
  * checkpoints or games focused on educational problems,
  * like math questions.
  */
-var Reno = function () {};
+var Reno = function () {
+  this.options( ( arguments[0] || {} ) );
+};
 
 Reno.prototype = new this.DifficultyAlgorithm;
 Reno.prototype.wrong = function () {
   this._x = this._x / 2.0;
+
+  if ( this._x < 1 ) {
+    this._x = 1;
+  }
+
   this._realThreshold = -1;
 
   return this._x;

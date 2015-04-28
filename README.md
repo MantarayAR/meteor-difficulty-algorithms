@@ -1,6 +1,30 @@
 # meteor-difficulty-algorithms
 Difficulty progression algorithms for use in Meteor
 
+# Summary
+
+This package provides a base class for calculating the current difficulty level based on past performance. It also provides two additional algorithms
+that extend the base class: Reno and Tahoe.  These algorithms are based on
+the network protocol algorithms of the same name.
+
+In order to use the algorithms, you have the following functionality to play with:
+
+```
+options()
+```
+
+```
+start()
+```
+
+```
+wrong()
+```
+
+```
+step()
+```
+
 # Examples
 
 In the following code snippet, we will create a Reno Difficulty Algorithm and console log the result that happens if a user "gets all questions correct" or "succeeds in game actions" except for step 9 and 20.
