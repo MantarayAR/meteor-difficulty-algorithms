@@ -12,11 +12,13 @@ Package.describe({
 
 Package.onUse(function(api) {
   api.versionsFrom('1.1.0.2');
-  api.addFiles('difficulty-algorithms.js');
+  api.addFiles('../src/difficulty-algorithm.js');
+  api.addFiles('../src/tahoe.js');
+  api.addFiles('../src/reno.js');
 });
 
 Package.onTest(function(api) {
   api.use('tinytest');
   api.use('mantarayar:difficulty-algorithms');
-  api.addFiles('difficulty-algorithms-tests.js');
+  api.addFiles('../tests/reno-test.js');
 });

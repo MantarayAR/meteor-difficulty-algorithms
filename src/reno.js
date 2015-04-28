@@ -1,68 +1,29 @@
-var Reno = {
-  _x : 1,
-  _realThreshold : 32,
-  _defaults : {
-    threshold : 32,
-    multiplier : 1.5,
-    additive : 1
-  },
-  _options : {},
-  options : function () {
-    if ( arguments.length === 0 ) {
-      return this._options || this._defaults;
-    }
+/**
+ * The Reno Difficulty Algorithm
+ *
+ * Based on the Reno Network Protocol.  This algorithm
+ * will exponentially increase the current difficulty
+ * level by the `multiplier` given. Once the difficulty
+ * goes above the `threshold` given, the algorithm will
+ * switch to adding the `additive` given.
+ *
+ * When `wrong()` is called, the algorithm simulates a
+ * packet loss, halving the current difficulty and
+ * resuming the additive increase.
+ *
+ * This algorithm produces a "sawtooth" pattern, and is
+ * useful for generating difficulties for games with
+ * checkpoints or games focused on educational problems,
+ * like math questions.
+ */
+var Reno = function () {};
 
-    var options = {};
+Reno.prototype = new this.DifficultyAlgorithm;
+Reno.prototype.wrong = function () {
+  this._x = this._x / 2.0;
+  this._realThreshold = -1;
 
-    if ( typeof arguments === 'object' ) {
-      for ( var property in this._defaults ) {
-        if ( this._defaults.hasOwnProperty( property ) ) {
-          options[property] = arguments[0][property] || this._defaults[property]
-        }
-      }
-    }
+  return this._x;
+};
 
-    this._options = options;
-  },
-  start : function () {
-    this._x = 1;
-    this._realThreshold = this._options.threshold;
-
-    return this._x;
-  },
-  wrong : function () {
-    this._x = this._x / 2.0;
-    this._realThreshold = -1;
-
-    return this._x;
-  },
-  step : function () {
-    // if we are under the threshold, use the multiplier
-    if ( this._x < this._realThreshold ) {
-      this._x = this._x * this._options.multiplier;
-    }
-    // if we are over the threshold, use the additive
-    else {
-      this._x = this._x + this._options.additive;
-    }
-
-    return this._x;
-  }
-}
-
-// Reno.options( {
-//   threshold : 32,
-//   multiplier : 1.5,
-//   additive : 1
-// } )
-// var difficulty = Reno.start();
-// document.write( difficulty + '<br/>' );
-
-// for ( var i = 0; i < 25; i++ ) {
-//   if ( i == 18 ) {
-//     Reno.wrong();
-//   }
-
-//   difficulty = Reno.step();
-//   document.write( difficulty + '<br/>' );
-// }
+this.DifficultyAlgorithm.Reno = Reno;
